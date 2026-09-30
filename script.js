@@ -12,13 +12,27 @@ tipButtons.forEach(function (tipButton) {
 
     tipButton.addEventListener("click", function () {
 
+        // Quitar selección anterior
+        tipButtons.forEach(function (button) {
+            button.classList.remove("active");
+        });
+
+        // Marcar botón seleccionado
+        tipButton.classList.add("active");
+
+        // Obtener porcentaje
         const selectedTip = tipButton.dataset.tip;
 
+        // Colocarlo en el input
         document.getElementById("tip").value = selectedTip;
 
     });
 
 });
+
+const errorMessage = document.getElementById("errorMessage");
+
+errorMessage.textContent = "";
 
 button.addEventListener("click", function () {
 
@@ -29,17 +43,18 @@ button.addEventListener("click", function () {
     // Validaciones
     // 1. cuenta válida
     if (bill <= 0) {
-        alert("Ingresa un monto de cuenta válido.");
-        return;
-    }
+    errorMessage.textContent = "Ingresa un monto de cuenta válido.";
+    return;
+}
+    
 // 2. propina válida
     if (tip < 0) {
-        alert("La propina no puede ser negativa.");
-        return;
+    errorMessage.textContent = "La propina no puede ser negativa.";
+    return;
     }
 // 3. número de personas válido
     if (people <= 0 || !Number.isInteger(people)) {
-        alert("El número de personas debe ser un entero mayor que 0.");
+        errorMessage.textContent = "Ingresa un número válido de personas.";
         return;
     }
 
@@ -48,6 +63,8 @@ button.addEventListener("click", function () {
     const total = bill + tipAmount;
     const perPerson = total / people;
 
+    errorMessage.textContent = "";
+    
     // Mostrar resultados
    document.getElementById("tipResult").textContent = currencyFormatter.format(tipAmount);
    document.getElementById("totalResult").textContent = currencyFormatter.format(total);

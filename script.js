@@ -1,3 +1,9 @@
+const currencyFormatter = new Intl.NumberFormat("es-CL", {
+    style: "currency",
+    currency: "CLP",
+    maximumFractionDigits: 0
+});
+
 const button = document.getElementById("calculate");
 
 button.addEventListener("click", function () {
@@ -29,7 +35,7 @@ button.addEventListener("click", function () {
     const perPerson = total / people;
 
     // Mostrar resultados
-    document.getElementById("tipResult").textContent = "$" + tipAmount;
-    document.getElementById("totalResult").textContent = "$" + total;
-    document.getElementById("personResult").textContent = "$" + perPerson;
+   document.getElementById("tipResult").textContent = currencyFormatter.format(tipAmount);
+   document.getElementById("totalResult").textContent = currencyFormatter.format(total);
+   document.getElementById("personResult").textContent = currencyFormatter.format(perPerson);
 });

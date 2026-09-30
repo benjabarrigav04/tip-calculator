@@ -6,6 +6,20 @@ const currencyFormatter = new Intl.NumberFormat("es-CL", {
 
 const button = document.getElementById("calculate");
 
+const tipButtons = document.querySelectorAll(".tip-button");
+
+tipButtons.forEach(function (tipButton) {
+
+    tipButton.addEventListener("click", function () {
+
+        const selectedTip = tipButton.dataset.tip;
+
+        document.getElementById("tip").value = selectedTip;
+
+    });
+
+});
+
 button.addEventListener("click", function () {
 
     const bill = Number(document.getElementById("bill").value);
